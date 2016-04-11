@@ -61,6 +61,9 @@ namespace DesktopSearchingSpellCorrection
                 }
             }
 
+            Constants.allFileSystems.AddRange(Constants.directoryList);
+            Constants.allFileSystems.AddRange(Constants.fileList);
+
             DesktopSearchBase.Constants.IsFinishedIndexing = true;
         }
     }

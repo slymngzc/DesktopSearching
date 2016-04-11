@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:DesktopSearchGUI"
         mc:Ignorable="d"
         Title="WaitWindow" Height="300" Width="300">
-    <Grid>
+    <!--<Grid>
         <Image gif:ImageBehavior.AnimatedSource="C:\Users\Sulo\documents\visual studio 2015\Projects\DesktopSearching\DesktopSearchGUI\Resources\partialfirstframe.gif" />
-    </Grid>
+    </Grid>-->
 </Window>

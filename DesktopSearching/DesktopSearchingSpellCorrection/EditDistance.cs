@@ -10,6 +10,8 @@ namespace DesktopSearchingSpellCorrection
     {
         public static int LevDistance(string kaynak, string amac)
         {
+            kaynak = kaynak.Replace(" ","").ToLower();
+            amac = amac.Replace(" ","").ToLower();
             int kuz = kaynak.Length;//n
             int auz = amac.Length;//m
 
@@ -39,15 +41,7 @@ namespace DesktopSearchingSpellCorrection
             {
                 for (int j = 1; j <= auz; j++)
                 {
-                    int maliyet = 0;
-                    if (amac[j - 1] == kaynak[i - 1])
-                    {
-                        maliyet = 0;
-                    }
-                    else
-                    {
-                        maliyet = 1;
-                    }
+                    int maliyet = amac[j - 1] == kaynak[i - 1] ? 0 : 1;
 
                     MesMatrix[i, j] = Math.Min(Math.Min(MesMatrix[i - 1, j] + 1, MesMatrix[i, j - 1] + 1), MesMatrix[i - 1, j - 1] + maliyet);
 

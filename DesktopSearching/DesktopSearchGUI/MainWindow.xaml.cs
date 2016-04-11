@@ -30,17 +30,23 @@ namespace DesktopSearchGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var a = DesktopSearchingSpellCorrection.Constants.fileList.Take(1000).ToList();
-            a.AddRange(DesktopSearchingSpellCorrection.Constants.directoryList.Take(1000).ToList());
-            dataGrid.ItemsSource = a;
+            dataGrid.ItemsSource = DesktopSearchingSpellCorrection.Constants.allFileSystems.Take(1000).ToList();
         }
 
-        private void populating_Correction(object sender, PopulatingEventArgs e)
+        private void searchBox_TextInput(object sender, TextCompositionEventArgs e)
         {
-            string text = autoCompleteBox.Text;
 
-            tempDirectoryList.Clear();
-            tempFileList.Clear();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+
+        }
+
+        private void searchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = searchBox.Text;
+            linkPanel.Visibility = Visibility.Hidden;
 
             switch (text.Length)
             {
@@ -51,15 +57,27 @@ namespace DesktopSearchGUI
                 case 2:
                     break;
                 case 3:
+                    var sonuc = DistanceCalculation.CalculateDistance(text);
+                    if (sonuc.Distance <= 2)
+                    {
+                        linkText.Text = sonuc.Name;
+                        linkPanel.Visibility = Visibility.Visible;
+                    }
+
+                    break;
                 default:
-                    tempDirectoryList = DesktopSearchingSpellCorrection.Constants.directoryList.Where(fsm => EditDistance.LevDistance(fsm.Name, text) > (text.Length+fsm.Name.Length)/2).ToList();
-                    tempFileList = DesktopSearchingSpellCorrection.Constants.fileList.Where(fsm => EditDistance.LevDistance(fsm.Name, text) > (text.Length + fsm.Name.Length) / 2).ToList();
+                    sonuc = DistanceCalculation.CalculateDistance(text);
+                    if (sonuc.Distance <= 3)
+                    {
+                        linkText.Text = sonuc.Name;
+                        linkPanel.Visibility = Visibility.Visible;
+                    }
                     break;
             }
 
-            tempDirectoryList.AddRange(tempFileList);
-            autoCompleteBox.ItemsSource = tempDirectoryList.Select(s => s.Name).ToList();
-            autoCompleteBox.PopulateComplete();
+            dataGrid.ItemsSource = DesktopSearchingSpellCorrection.Constants.allFileSystems
+                .Where(fsm => fsm.Name.ToLower()
+                .Replace(" ","").Contains(text.ToLower().Replace(" ",""))).ToList();
         }
     }
 }

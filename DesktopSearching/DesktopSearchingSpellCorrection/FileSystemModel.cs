@@ -11,5 +11,7 @@ namespace DesktopSearchingSpellCorrection
         public string Extension { get; set; }
 
         public string ASCIIValue { get; set; }
+
+        public int Distance { get; set; }
     }
 }

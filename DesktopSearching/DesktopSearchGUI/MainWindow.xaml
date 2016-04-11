@@ -23,8 +23,16 @@
         </Menu>
         <Grid >
             <Label x:Name="label" Content="Aranacak Dosya:" HorizontalAlignment="Left" Margin="20,21,0,0" VerticalAlignment="Top"/>
-            <Controls1:AutoCompleteBox Name="autoCompleteBox" Populating="populating_Correction" HorizontalAlignment="Left" Margin="123,21,0,0" VerticalAlignment="Top" Width="238"/>
             <DataGrid x:Name="dataGrid" Margin="20,80,20,20" VerticalAlignment="Stretch" MinHeight="180" MinWidth="460"/>
+            <TextBox x:Name="searchBox" HorizontalAlignment="Left" Height="23" Margin="143,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="208" TextChanged="searchBox_TextChanged"/>
+            <WrapPanel Name="linkPanel" HorizontalAlignment="Left" Height="28" Margin="20,52,0,0" VerticalAlignment="Top" Width="331" Opacity="{DynamicResource {x:Static SystemParameters.IconHeightKey}}" Visibility="Hidden">
+                <Label x:Name="label1" Content="Bunu Mu Demek İstediniz:" RenderTransformOrigin="0.779,1.352" Width="154"/>
+                <TextBlock Height="18">           
+                <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" Name="link">
+                    <TextBlock Name="linkText"></TextBlock>
+                </Hyperlink>
+                </TextBlock>
+            </WrapPanel>
         </Grid>
     </DockPanel>
 

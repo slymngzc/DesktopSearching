@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="DistanceCalculation.cs" />
     <Compile Include="EditDistance.cs" />
     <Compile Include="FileParser.cs" />
     <Compile Include="FileSystemModel.cs" />
